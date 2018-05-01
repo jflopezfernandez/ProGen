@@ -1,0 +1,11 @@
+#ifndef PROGEN_FILE_HXX_
+#define PROGEN_FILE_HXX_
+
+#ifndef STDLIB_FSTREAM_INCLUDED
+#define STDLIB_FSTREAM_INCLUDED
+#include <fstream>
+#endif // STDLIB_FSTREAM_INCLUDED
+
+//
+
+#endif // PROGEN_FILE_HXX_
