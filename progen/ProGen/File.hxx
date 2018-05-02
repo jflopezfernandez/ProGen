@@ -30,6 +30,34 @@ namespace FileIO {
 	DWORD FileAttributes(const std::string& filename) noexcept;
 
 	bool FileExists(const std::string& filename) noexcept;
+
+	struct NewFileDefaultConfiguration {
+	private:
+		DWORD defaultAccess_ = GENERIC_READ | GENERIC_WRITE;
+		DWORD defaultShareMode_ = FILE_SHARE_READ | FILE_SHARE_DELETE;
+		LPSECURITY_ATTRIBUTES defaultSecurityAttributes_ = NULL;
+		DWORD defaultCreationDisposition_ = OPEN_ALWAYS;
+		DWORD defaultAttributes_ = NULL;
+		HANDLE defaultTemplateFile_ = NULL;
+
+	public:
+		DWORD defaultAccess() const noexcept { return defaultAccess_; }
+		DWORD defaultShareMode() const noexcept { return defaultShareMode_; }
+		LPSECURITY_ATTRIBUTES defaultSecurityAttributes() const noexcept { return defaultSecurityAttributes_; }
+		DWORD defaultCreationDisposition() const noexcept { return defaultCreationDisposition_; }
+		DWORD defaultAttributes() const noexcept { return defaultAttributes_; }
+		HANDLE defaultTemplateFile() const noexcept { return defaultTemplateFile_; }
+
+		void changeDefaultAccess(const DWORD access) { defaultAccess_ = access; }
+		void changeDefaultShareMode(const DWORD shareMode) { defaultShareMode_ = shareMode; }
+		void changeDefaultSecurityAttributes(const LPSECURITY_ATTRIBUTES attributes) { defaultSecurityAttributes_ = attributes; }
+		void changeDefaultCreationDisposition(const DWORD disposition) { defaultCreationDisposition_ = disposition; }
+		void changeDefaultAttributes(const DWORD attributes) { defaultAttributes_ = attributes; }
+		void changeDefaultTemplateFile(const HANDLE file) { defaultTemplateFile_ = file; }
+	};
+
+	HANDLE newFile(const std::string& filename) noexcept;
+
 } // End namespace FileIO
 
 class File {
@@ -72,11 +100,10 @@ public:
 	 *
 	 *  for (auto i = 0; i < 10; i++) {
 	 *  	for (auto j = 0; j < 10; j++) {
-	 *		outputFile.handle() << j << ' ';
-	 *	}
+	 *		    outputFile.handle() << j << ' ';
+	 *	    }
 	 *  
-	 *  outputFile.handle() << '\n';
-	 *  
+	 *      outputFile.handle() << '\n';
 	 *  }
 	 *
 	 *  outputFile.handle() << '\n';

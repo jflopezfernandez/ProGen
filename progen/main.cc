@@ -1,4 +1,14 @@
 
+#ifndef WINDOWS_HEADER_INCLUDED
+#define WINDOWS_HEADER_INCLUDED
+#include <Windows.h>
+#endif // WINDOWS_HEADER_INCLUDED
+
+#ifndef STDLIB_CASSERT_INCLUDED
+#define STDLIB_CASSERT_INCLUDED
+#include <assert.h>
+#endif // STDLIB_CASSERT_INCLUDED
+
 #ifndef STDLIB_CSTDLIB_INCLUDED
 #define STDLIB_CSTDLIB_INCLUDED
 #include <stdlib.h>
@@ -13,20 +23,10 @@
 #include <ProGen/File.hxx>
 #endif // PROGEN_FILE_HXX_
 
-//void ValidateCmdLineParameters(const int argc, char *argv[]) {
-//	if (argc == 1) {
-//		// TODO: Let user know or something
-//
-//		exit(EXIT_FAILURE);
-//	}
-//
-//	// TODO: Validate argv somehow
-//}
 
 int main(int argc, char *argv[])
 {
-	//ValidateCmdLineParameters(argc, argv);
-
+	//...
 
 	return EXIT_SUCCESS;
 }

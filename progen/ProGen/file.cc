@@ -24,6 +24,28 @@ namespace FileIO {
 
 		return true;
 	}
+
+	HANDLE newFile(const std::string& filename) noexcept {
+		static NewFileDefaultConfiguration NewFileDefaults;
+
+		HANDLE newFile = CreateFile(filename.c_str(),
+			NewFileDefaults.defaultAccess(),
+			NewFileDefaults.defaultShareMode(),
+			NewFileDefaults.defaultSecurityAttributes(),
+			NewFileDefaults.defaultCreationDisposition(),
+			NewFileDefaults.defaultAttributes(),
+			NewFileDefaults.defaultTemplateFile()
+		);
+
+		if (newFile == INVALID_HANDLE_VALUE) {
+			// TODO: Handle error
+
+			exit(EXIT_FAILURE);
+		}
+
+		return newFile;
+	}
+
 } // End namespace FileIO
 
 File::File()
