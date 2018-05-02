@@ -48,16 +48,35 @@ namespace FileIO {
 
 } // End namespace FileIO
 
+void File::setPath() {
+	const auto DEFAULT_BUFFER_SIZE = 128;
+
+	char pathBuffer[DEFAULT_BUFFER_SIZE] = { 0 };
+	const auto bytesWritten = GetFullPathName(filename.c_str(), DEFAULT_BUFFER_SIZE, pathBuffer, NULL);
+
+	if (!bytesWritten) {
+		// TODO: Handle errors
+
+		exit(EXIT_FAILURE);
+	}
+	
+	changePath(pathBuffer);
+}
+
 File::File()
-	: filename(""), path { "./" } {
+	: filename(""), path_ { "./" } {
 }
 
 File::File(const std::string& filename)
-	: filename(filename), path { "./" } {
+	: filename(filename), path_ { "./" } {
+
+	setPath();
 }
 
-File::File(const std::string_view& filename)
-	: filename(filename), path { "./" } {
+File::File(const std::string& filename, const std::string& filePath)
+	: filename(filename), path_(filePath + filename) {
+
+	setPath();
 }
 
 void File::open(const std::ios::openmode& mode) {
@@ -72,8 +91,8 @@ std::string File::name() const noexcept {
 	return filename;
 }
 
-std::string File::fullPathName() const noexcept {
-	return path + filename;
+std::string File::path() const noexcept {
+	return path_;
 }
 
 std::fstream& File::handle() {
@@ -85,5 +104,5 @@ void File::changeName(const std::string& newFilename) {
 }
 
 void File::changePath(const std::string& newPath) {
-	path = newPath;
+	path_ = newPath;
 }

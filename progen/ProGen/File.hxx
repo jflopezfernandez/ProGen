@@ -63,16 +63,18 @@ namespace FileIO {
 class File {
 	std::string filename;
 
-	std::string path;
+	std::string path_;
 
 	std::fstream stream;
+
+	void setPath();
 
 public:
 	File();
 
 	File(const std::string& filename);
 
-	File(const std::string_view& filename);
+	File(const std::string& filename, const std::string& filePath);
 
 	void open(const std::ios::openmode& mode);
 
@@ -88,7 +90,7 @@ public:
 
 	std::string name() const noexcept;
 
-	std::string fullPathName() const noexcept;
+	std::string path() const noexcept;
 
 	/** Function: std::fstream& handle()
 	 *
