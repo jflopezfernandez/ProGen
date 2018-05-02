@@ -13,25 +13,20 @@
 #include <ProGen/File.hxx>
 #endif // PROGEN_FILE_HXX_
 
-void ValidateCmdLineParameters(const int argc, char *argv[]) {
-	if (argc == 1) {
-		// TODO: Let user know or something
-
-		exit(EXIT_FAILURE);
-	}
-
-	// TODO: Validate argv somehow
-}
+//void ValidateCmdLineParameters(const int argc, char *argv[]) {
+//	if (argc == 1) {
+//		// TODO: Let user know or something
+//
+//		exit(EXIT_FAILURE);
+//	}
+//
+//	// TODO: Validate argv somehow
+//}
 
 int main(int argc, char *argv[])
 {
-	ValidateCmdLineParameters(argc, argv);
+	//ValidateCmdLineParameters(argc, argv);
 
-	if (File::exists(argv[1])) {
-		std::cout << "File exists.\n";
-	} else {
-		std::cout << "File does not exist.\n";
-	}
 
 	return EXIT_SUCCESS;
 }

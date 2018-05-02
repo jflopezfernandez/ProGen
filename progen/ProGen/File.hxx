@@ -34,12 +34,13 @@ namespace FileIO {
 
 class File {
 	std::string filename;
+
 	std::string path;
 
-	std::fstream handle;
+	std::fstream stream;
 
 public:
-	File() = delete;
+	File();
 
 	File(const std::string& filename);
 
@@ -60,6 +61,35 @@ public:
 	std::string name() const noexcept;
 
 	std::string fullPathName() const noexcept;
+
+	/** Function: std::fstream& handle()
+	 *
+	 *  Example Usage:
+	 *
+	 *  File outputFile;
+	 *  outputFile.changeName("test-file.txt");
+	 *  outputFile.open(std::ios::out);
+	 *
+	 *  for (auto i = 0; i < 10; i++) {
+	 *  	for (auto j = 0; j < 10; j++) {
+	 *		outputFile.handle() << j << ' ';
+	 *	}
+	 *  
+	 *  outputFile.handle() << '\n';
+	 *  
+	 *  }
+	 *
+	 *  outputFile.handle() << '\n';
+	 *  outputFile.close();
+	 *
+	 */
+
+	std::fstream& handle();
+
+	void changeName(const std::string& newFilename);
+
+	void changePath(const std::string& newPath);
+
 }; // End class File
 
 #endif // PROGEN_FILE_HXX_

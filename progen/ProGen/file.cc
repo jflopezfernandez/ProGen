@@ -26,6 +26,10 @@ namespace FileIO {
 	}
 } // End namespace FileIO
 
+File::File()
+	: filename(""), path { "./" } {
+}
+
 File::File(const std::string& filename)
 	: filename(filename), path { "./" } {
 }
@@ -35,11 +39,11 @@ File::File(const std::string_view& filename)
 }
 
 void File::open(const std::ios::openmode& mode) {
-	handle.open(filename, mode);
+	stream.open(filename, mode);
 }
 
 void File::close() {
-	handle.close();
+	stream.close();
 }
 
 std::string File::name() const noexcept {
@@ -48,4 +52,16 @@ std::string File::name() const noexcept {
 
 std::string File::fullPathName() const noexcept {
 	return path + filename;
+}
+
+std::fstream& File::handle() {
+	return stream;
+}
+
+void File::changeName(const std::string& newFilename) {
+	filename = newFilename;
+}
+
+void File::changePath(const std::string& newPath) {
+	path = newPath;
 }
